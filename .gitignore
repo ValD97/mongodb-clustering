@@ -1,0 +1,23 @@
+
+# Created by https://www.gitignore.io/api/ssh,ansible,vagrant
+# Edit at https://www.gitignore.io/?templates=ssh,ansible,vagrant
+
+### Ansible ###
+*.retry
+
+### SSH ###
+**/.ssh/id_*
+**/.ssh/*_id_*
+**/.ssh/known_hosts
+
+### Vagrant ###
+# General
+.vagrant/*
+
+# Log files (if you are creating logs in debug mode, uncomment this)
+# *.log
+
+### Vagrant Patch ###
+*.box
+
+# End of https://www.gitignore.io/api/ssh,ansible,vagrant
