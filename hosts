@@ -1,0 +1,9 @@
+[mongo]
+mongo01 ansible_host=10.0.0.11
+mongo02 ansible_host=10.0.0.12
+mongo03 ansible_host=10.0.0.13
+mongo04 ansible_host=10.0.0.14
+mongo05 ansible_host=10.0.0.15
+mongo06 ansible_host=10.0.0.16
+mongo07 ansible_host=10.0.0.17
+mongo08 ansible_host=10.0.0.18
