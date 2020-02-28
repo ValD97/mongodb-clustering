@@ -24,4 +24,21 @@ Vagrant.configure("2") do |config|
     # Customize the amount of memory on the VM:
     vb.memory = "1024"
   end
+
+  # SHELL
+  config.vm.provision "shell" do |s|
+    ssh_pub_key = File.readlines("./id_rsa.pub").first.strip
+    ssh_priv_key = File.read("./id_rsa")
+    s.inline = <<-SHELL
+      mkdir -p /root/.ssh
+      echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
+      echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
+      echo "#{ssh_priv_key}" > /root/.ssh/id_rsa
+      chmod 600 /root/.ssh/id_rsa
+      echo "#{ssh_priv_key}" > /home/vagrant/.ssh/id_rsa
+      chown vagrant:vagrant /home/vagrant/.ssh/id_rsa
+      chmod 600 /home/vagrant/.ssh/id_rsa
+      apt install -y python
+    SHELL
+  end
 end
