@@ -7,10 +7,17 @@
       apt_key:
         url: https://www.mongodb.org/static/pgp/server-4.2.asc
         state: present
+
     - name: Add MongoDB repository
       apt_repository:
         repo: deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse
+
     - name: Install MongoDB
       apt:
-        name: mongodb
+        name: mongodb-org
         update_cache: yes
+
+    - name: Start service Mongod
+      service:
+        name: mongod
+        state: started
