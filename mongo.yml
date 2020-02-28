@@ -3,10 +3,10 @@
 - hosts: mongo
   remote_user: root
   tasks:
-    - name: Add MongoDB apt key
-      apt_key:
-        url: https://www.mongodb.org/static/pgp/server-4.2.asc
-        state: present
+    #- name: Add MongoDB apt key
+      #apt_key:
+      #  url: https://www.mongodb.org/static/pgp/server-4.2.asc
+      #  state: present
 
     - name: Add MongoDB repository
       apt_repository:
@@ -15,9 +15,53 @@
     - name: Install MongoDB
       apt:
         name: mongodb-org
-        update_cache: yes
 
-    - name: Start service Mongod
+    - name: Start service mongod
       service:
         name: mongod
         state: started
+
+    - name: Config MongoDB
+      template:
+        src: mongod.conf.j2
+        dest: /etc/mongod.conf
+      notify:
+        - restart mongod
+
+  handlers:
+  - name: restart mongod
+    service:
+      name: mongod
+      state: restarted
+
+- hosts: mongo-cfg
+  remote_user: root
+  tasks:
+    - name: Config MongoDB-config
+      template:
+        src: mongod-cfg.conf.j2
+        dest: /etc/mongod.conf
+      notify:
+        - restart mongod  
+
+  handlers:
+  - name: restart mongod
+    service:
+      name: mongod
+      state: restarted
+
+- hosts: mongo-shard
+  remote_user: root
+  tasks:
+    - name: Config MongoDB-shards
+      template:
+        src: mongod-shard.conf.j2
+        dest: /etc/mongod.conf
+      notify:
+        - restart mongod  
+
+  handlers:
+  - name: restart mongod
+    service:
+      name: mongod
+      state: restarted
