@@ -9,6 +9,8 @@
 **/.ssh/id_*
 **/.ssh/*_id_*
 **/.ssh/known_hosts
+id_*
+*_id_*
 
 ### Vagrant ###
 # General
