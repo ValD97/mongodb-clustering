@@ -1,13 +1,19 @@
 ---
-# This file's tasks are for imported the MongoDB repository (with the associatied key).
-# It redirects according to the OS family to the good file (Debian would use apt, RedHat yum, etc).
+# Tasks for setting up a mongo config instance.
 #
 # Author: Valentin DAMBRINE <val.dambrine97@gmail.com>
-# 
+#
 # Date: March, 07th 2020
 
-- hosts: mongo
-  remote_user: root
-  tasks:
-    - name: Check OS family to prepare install
-      include_tasks: {{ ansible_facts['os_family'] }}.yml
+- name: Enable and start mongod service
+  service:
+    name: mongod
+    enabled: yes
+    state: started
+
+- name: Config MongoDB
+  template:
+    src: mongod-cfg.conf.j2
+    dest: /etc/mongod.conf
+  notify:
+    - restart mongod
