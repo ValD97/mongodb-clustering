@@ -1,0 +1,12 @@
+---
+# This file's tasks are for imported the MongoDB repository (with the associatied key).
+# It redirects according to the OS family to the good file (Debian would use apt, RedHat yum, etc).
+#
+# Author: Valentin DAMBRINE <val.dambrine97@gmail.com>
+# 
+# Date: March, 07th 2020
+
+
+- name: Check OS family to prepare install
+  import_tasks: debian.yml
+  when: ansible_facts['os_family']|lower == 'debian'
