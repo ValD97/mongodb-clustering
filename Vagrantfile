@@ -10,6 +10,11 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "ubuntu/bionic64"
 
+  config.vm.define "ansible-master" do |node|
+    node.vm.network "private_network", ip: "10.0.0.100"
+  end
+
+
   (1..8).each do |i|
     config.vm.define "mongo-#{i}" do |node|
       node.vm.network "private_network", ip: "10.0.0.1#{i}"
