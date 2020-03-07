@@ -10,3 +10,13 @@
   remote_user: root
   roles:
     - common
+
+- hosts: mongo-cfg
+  remote_user: root
+  roles:
+    - mongo-config
+
+- hosts: mongo-shard
+  remote_user: root
+  roles:
+    - mongo-shard
