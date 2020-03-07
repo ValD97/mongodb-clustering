@@ -1,0 +1,11 @@
+---
+# Handle the restart of the mongod service
+#
+# Author: Valentin DAMBRINE <val.dambrine97@gmail.com>
+#
+# Date: March, 07th 2020
+
+- name: restart mongod
+  service:
+    name: mongod
+    state: restarted
